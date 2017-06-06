@@ -1,0 +1,43 @@
+<html><head>
+  <SCRIPT src="http://java.com/js/dtjava.js"></SCRIPT>
+<script>
+    function launchApplication(jnlpfile) {
+        dtjava.launch(            {
+                url : 'MoldranDishinator.jnlp'
+            },
+            {
+                javafx : '8.0+'
+            },
+            {}
+        );
+        return false;
+    }
+</script>
+
+<script>
+    function javafxEmbedMoldranDishinator_id() {
+        dtjava.embed(
+            {
+                id : 'MoldranDishinator_id',
+                url : 'MoldranDishinator.jnlp',
+                placeholder : 'javafx-app-placeholder',
+                width : '1200',
+                height : '425'
+            },
+            {
+                javafx : '8.0+'
+            },
+            {}
+        );
+    }
+    <!-- Embed FX application into web page once page is loaded -->
+    dtjava.addOnloadCallback(javafxEmbedMoldranDishinator_id);
+</script>
+
+</head><body>
+<h2>Test page for <b>MoldranDishinator</b></h2>
+  <b>Webstart:</b> <a href='MoldranDishinator.jnlp' onclick="return launchApplication('MoldranDishinator.jnlp');">click to launch this app as webstart</a><br><hr><br>
+
+  <!-- Applet will be inserted here -->
+  <div id='javafx-app-placeholder'></div>
+</body></html>
