@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MoldranDishinator.jar" size="11207" download="eager" />
+    <jar href="MoldranDishinator.jar" size="11084" download="eager" />
     <jar href="commons-lang3-3.5.jar" size="479881" download="eager" />
   </resources>
   <jfx:javafx-desc  width="1200" height="425" main-class="sample.Main"  name="MoldranDishinator" />

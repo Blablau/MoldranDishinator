@@ -99,7 +99,7 @@ public class Controller {
         okButton.setDisable(true);
         initTables();
 
-        System.out.println("getting emotetimestamps of vod: " + vodID);
+        //System.out.println("getting emotetimestamps of vod: " + vodID);
         url = "https://rechat.twitch.tv/rechat-messages?start=123&video_id=v" + vodID;
         try {
             readURL(url);
@@ -114,7 +114,7 @@ public class Controller {
                 if (isErrorURL)
 
                 {
-                    System.out.println("getting start and stoptime");
+                    //System.out.println("getting start and stoptime");
                     Pattern p = Pattern.compile("\\d+");
                     Matcher m = p.matcher(message);
                     boolean first = true;
@@ -135,11 +135,9 @@ public class Controller {
                         videolength = Long.parseLong(stopTimeStamp) - Long.parseLong(startTimeStamp);
 
                     } catch (Exception e) {
-                        showError("Vod-ID must be valid.");
+                        showError("Vod-ID must be valid. The ID is at the end of a Twitch URL. ex.: https://www.twitch.tv/videos/148457111 ; 148457111 would be the ID.");
                     }
 
-                    //System.out.println("start" + startTimeStamp);
-                    //System.out.println("stop" + stopTimeStamp);
 
                     String timeMarkString = "";
                     ObservableList<CountsRow> maxObsList = FXCollections.observableArrayList();
@@ -165,14 +163,14 @@ public class Controller {
                         maxRubCount = StringUtils.countMatches(message, "maxRub");
 
 
-                        int hours = (int) currentTimemark / 3600;
-                        int minutes = (int) (currentTimemark % 3600) / 60;
-                        int seconds = (int) currentTimemark % 60;
+                        int hours = currentTimemark / 3600;
+                        int minutes =  currentTimemark % 3600 / 60;
+                        int seconds = currentTimemark % 60;
 
-                        //System.out.println(videolength);
+
                         timeMarkString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 
-                        //System.out.println(timeMarkString);
+
 
                         if (maxDishCount > 0 || maxWOWCount > 0 || maxNOCount > 0 || maxKappaCount > 0 || maxSubCount > 0 || maxCalcCount > 0 || maxDWGCount > 0 || maxAllinCount > 0 || maxRubCount > 0) {
 
@@ -200,7 +198,7 @@ public class Controller {
         if (Platform.isFxApplicationThread()) {
             Stage s = new Stage();
             VBox v = new VBox();
-            v.setPrefWidth(200);
+            v.setPrefWidth(800);
             v.setPrefHeight(100);
             v.setAlignment(Pos.CENTER);
             v.getChildren().add(new Label("Error : " + error));
@@ -212,7 +210,7 @@ public class Controller {
             Platform.runLater(() -> {
                 Stage s = new Stage();
                 VBox v = new VBox();
-                v.setPrefWidth(200);
+                v.setPrefWidth(800);
                 v.setPrefHeight(100);
                 v.setAlignment(Pos.CENTER);
                 v.getChildren().add(new Label("Error: " + error));
@@ -224,17 +222,13 @@ public class Controller {
         }
     }
 
-    public enum Emotes {
-        maxDish, maxWOW, maxNO, maxKappa,
-        maxSub, maxCalc, maxDWG, maxAllin
-    }
 
     public void onButtonPress(ActionEvent actionEvent) {
         if (vodNumberTF.getText().matches("[0-9]+") && vodNumberTF.getText().length() > 2) {
             vodNumber = vodNumberTF.getText();
             getDishStampsFromVodID(vodNumber);
         } else {
-            showError("Vod-ID must be valid.");
+            showError("Vod-ID must be valid. The ID is at the end of a Twitch URL. ex.: https://www.twitch.tv/videos/148457111 ; 148457111 would be the ID.");
         }
 
     }
